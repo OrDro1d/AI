@@ -61,13 +61,24 @@ percentile_25 = sorted(data, key=lambda x: x[2])[int((25/100) * lines_number)][2
 percentile_50 = sorted(data, key=lambda x: x[2])[int((50/100) * lines_number)][2]
 percentile_75 = sorted(data, key=lambda x: x[2])[int((75/100) * lines_number)][2]
 print(percentile_25, percentile_50, percentile_75)
-# Столбчатая диаграмма соотношения количества городов и значений их населения
-fig, ax = plt.subplots()
-ax.plot([0] + list(map(lambda x: x[0], data)), [None] + list(map(lambda x: x[2], data)))
-ax.set_xticks([i for i in range(-100, 1100, 100)])
-ax.set_xlim(-100, 1100)
-ax.set_xlabel("Города")
-ax.set_ylabel("Население")
-ax.set_title("Города и население")
-ax.grid(True)
+# 1.10. Столбчатая диаграмма соотношения количества городов и населения
+fig_1, ax_1 = plt.subplots(figsize=(12, 6))
+ax_1.bar(list(map(lambda x: x[1], data)), list(map(lambda x: x[2], data)))
+ax_1.set_xlim(-20, 1020)
+ax_1.set_xticks([i for i in range(0, 1050, 100)])
+ax_1.set_xticks([i for i in range(0, 1050)], minor=True)
+ax_1.set_xlabel("Города")
+ax_1.set_ylabel("Население")
+ax_1.set_title("Столбчатая диаграмма")
+# 1.11. (Пока пропускаю)
+pass
+# 1.12. Круговая диаграмма соотношения количества городов и населения
+fig_2, ax_2 = plt.subplots(figsize=(8, 8))
+color = 197599
+ax_2.pie(list(map(lambda x: x[2], data[:8])),
+         labels=list(map(lambda x: x[1], data[:8])),
+         autopct="%.2f%%",
+         colors=[f"#{color + i * 300}" for i in range(0, 8)],
+         wedgeprops={"linewidth": 1, "edgecolor": "white"})
+ax_2.set_title("Круговая диаграмма")
 plt.show()
